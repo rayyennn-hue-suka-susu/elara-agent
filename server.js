@@ -9,6 +9,8 @@ const port = process.env.PORT || 8787;
 const apiKey = process.env.OPENROUTER_API_KEY;
 const model = process.env.OPENROUTER_MODEL || 'openrouter/free';
 
+app.get('/', (_req, res) => res.json({ name: 'Elara Agent Backend', ok: true, endpoint: 'POST /chat' }));
+app.get('/chat', (_req, res) => res.status(405).json({ error: 'Gunakan POST /chat dengan body messages.' }));
 app.get('/health', (_req, res) => res.json({ ok: true, configured: Boolean(apiKey), model }));
 
 app.post('/chat', async (req, res) => {
